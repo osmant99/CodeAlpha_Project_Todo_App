@@ -1,24 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
 
+import AddTask from "./components/AddTask";
 function App() {
+  const [task, setTask] = useState(
+    JSON.parse(localStorage.getItem("list")) || []
+  );
+  const [newTask, setNewTask] = useState("");
+  const [editId, setEditId] = useState(null);
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(task));
+  }, [task]);
+  const addNewTasks = () => {
+    if (newTask === "") {
+      alert("Please add Task first");
+    } else if (editId) {
+      const updateTask = task.map((todo) => {
+        return todo.id === editId ? { ...todo, todo: newTask } : todo;
+      });
+      setTask(updateTask);
+      setEditId(null);
+    } else {
+      const id = task.length ? task[task.length - 1].id + 1 : 1;
+      const myTask = { id: id, todo: newTask };
+      setTask([...task, myTask]);
+      setNewTask("");
+    }
+  };
+  const handleDelete = (id) => {
+    const filterTask = task.filter((todo) => {
+      return todo.id !== id;
+    });
+    setTask(filterTask);
+  };
+  const handleEdit = (id) => {
+    const findTask = task.find((todos) => {
+      return todos.id === id;
+    });
+    setNewTask(findTask.todo);
+    setEditId(id);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AddTask
+        addNewTasks={addNewTasks}
+        newTask={newTask}
+        setNewTask={setNewTask}
+        handleDelete={handleDelete}
+        task={task}
+        handleEdit={handleEdit}
+      />
+    </>
   );
 }
 

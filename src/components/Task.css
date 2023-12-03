@@ -1,0 +1,73 @@
+.wrapper_task {
+  margin-top: 4rem;
+  width: 100%;
+  max-width: 48rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.task {
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.task p {
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: #88afee;
+  font-size: 1.3rem;
+  flex-grow: 1;
+}
+
+.task_svg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.task svg {
+  font-size: 1rem;
+  width: 40px;
+  min-width: 40px;
+  height: 34px;
+  cursor: pointer;
+}
+.del_svg {
+  color: #ff4444;
+}
+.edit_svg {
+  color: #ffbb33;
+}
+.del_svg:hover > path,
+.del_svg:focus > path {
+  fill: #cc0000;
+}
+.edit_svg:hover > path,
+.edit_svg:focus > path {
+  fill: #ff8800;
+}
+@media screen and (max-width: 500px) {
+  .task {
+    gap: 5px;
+  }
+  .task p {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .task_svg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .task svg {
+    font-size: 0.5rem;
+    width: 32px;
+    min-width: 32px;
+    height: 26px;
+    cursor: pointer;
+  }
+}
