@@ -19,6 +19,7 @@ function App() {
       });
       setTask(updateTask);
       setEditId(null);
+      setNewTask("");
     } else {
       const id = task.length ? task[task.length - 1].id + 1 : 1;
       const myTask = { id: id, todo: newTask };
